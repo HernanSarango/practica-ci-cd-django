@@ -10,7 +10,7 @@ on:
       - master
 
 jobs:
-  test:
+  test-and-build:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +20,7 @@ jobs:
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Instalar dependencias
         run: |
@@ -30,3 +30,7 @@ jobs:
       - name: Ejecutar pruebas
         run: |
           python manage.py test
+
+      - name: Construir imagen Docker
+        run: |
+          docker build -t practica-ci-cd-django:latest .
